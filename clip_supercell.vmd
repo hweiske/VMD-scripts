@@ -1,0 +1,27 @@
+#!/bin/tclsh
+#not working perfectly yet. problems with the clipping planes
+proc create_supercell { molIn abc x y z} {
+   pbc set "$abc" -all
+   set newmol [::TopoTools::replicatemol $molIn $x $y $z]
+}
+proc CLIP_X {molIn dist1 dist2} {
+   set CELL [molinfo $molIn get { a b c}]
+   set X [lindex $CELL 0]
+   ::ClipTool::cliptool
+set ::ClipTool::whichclip 0
+   set ::ClipTool::clip_on(0)
+   set ::ClipTool::clip_distance(0) $dist1
+   set ::ClipTool::clip_normal(0) {1 0 0}
+::ClipTool::update_clipplane
+set ::ClipTool::whichclip 1
+   set ::ClipTool::clip_on(1)
+   set ::ClipTool::clip_distance(1) $dist2
+   set ::ClipTool::clip_normal(1) {-1 0 0}
+::ClipTool::update_clipplane
+}
+proc clip_super {molIn x y z} {
+   set CELL [molinfo $molIn get { a b c}]
+   create_supercell $molIn "$CELL" $x $y $z
+   set X [lindex $CELL 0]
+   CLIP_X $molIn [expr { $X * -0.6 }] [expr { $X * -0.92 }]
+}
