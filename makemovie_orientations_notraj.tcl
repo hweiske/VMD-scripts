@@ -23,7 +23,7 @@ proc take_picture {args} {
   if {$arg1 == "reset"} {
     set take_picture(frame)  0
     set take_picture(vpts) 0
-    set take_picture(format) "/home/hweiske/vmd_pictures/img_vpts.%01d.%04d.tga"
+    set take_picture(format) "./img_vpts.%01d.%04d.tga"
     set take_picture(method) "Tachyon"
     set take_picture(modulo) 1
     set take_picture(exec) {}  
@@ -48,12 +48,12 @@ take_picture reset
 
 proc make_movie_files {} {
 	puts [molinfo list]
-	take_picture format "/home/hweiske/vmd_pictures/orient_%02d.frame.tga"
+	take_picture format "./orient_%02d.frame.tga"
 	# loop through the frames
 	foreach i [molinfo list] {
 		puts $i
 		set name [molinfo $i get name]
-		take_picture format "/home/hweiske/vmd_pictures/orient_%02d.${name}.dat"
+		take_picture format "./orient_%02d.${name}.dat"
 		take_picture frame [expr $i + 1]
 		foreach j [molinfo list] {
 			molecule off $j
@@ -71,6 +71,7 @@ proc make_movie_files {} {
 	                # force display update
 	                display update
 			molecule on $i
+
 		}
         }
 }

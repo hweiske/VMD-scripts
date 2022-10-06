@@ -3,7 +3,7 @@
 #second argument something.vmd which loads representations and so on.
 NAME='rendering'
 PICTURES='/home/hweiske/vmd_pictures'
-SCRIPTS='/home/hweiske/vmd_drawings'
+SCRIPTS='/home/hweiske/VMD-scripts'
 echo "render options Tachyon '/usr/local/vmd/lib/vmd/tachyon_LINUXAMD64 -aasamples 12 %s -format TARGA'" > "${NAME}.vmd"
 echo "play $1 " >>"${NAME}.vmd"
 echo "play $2 " >>"${NAME}.vmd"

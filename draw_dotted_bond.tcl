@@ -12,6 +12,6 @@ draw color $col
 
 foreach seg $segs {
 set newpos [vecsub $coord1 [vecscale [vecsub $coord1 $coord2] [expr $seg * 0.1 ]]]
-draw sphere $newpos radius 0.1
+draw sphere $newpos radius 0.1 resolution 30
 }
 }
