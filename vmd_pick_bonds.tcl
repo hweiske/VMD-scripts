@@ -9,7 +9,6 @@ proc draw_dotted_pick {args} {
     set coord2 [lindex [$sel get {x y z}] $b]
     set LENGTH [veclength [vecsub $coord1 $coord2]]
     draw material AOChalky
-    draw color cyan
     foreach seg $segs {
 	    set newpos [vecsub $coord1 [vecscale [vecsub $coord1 $coord2] [expr $seg * 0.1 ]]]
 	    graphics $vmd_pick_mol sphere $newpos radius 0.1 resolution 30

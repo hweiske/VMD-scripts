@@ -1,44 +1,6 @@
-#!/bin/tclsh
-foreach i [molinfo list] {
-mol delrep  0 $i
-mol selection element Ga and z >= 10
-mol representation VDW 0.3 45
-mol color element
-mol material AOChalky
-mol addrep $i
-mol selection element Ga
-mol representation VDW 0.25 45
-mol color element
-mol material AOChalky
-mol addrep $i
-mol selection element As and z >= 10
-mol representation VDW 0.2 45
-mol color element
-mol material AOChalky
-mol addrep $i
-mol selection all
-mol representation VDW 0.15 45
-mol color element
-mol material AOChalky
-mol addrep $i
-mol selection all
-mol representation DynamicBonds 2.0 0.075 30
-mol color ColorID 2
-mol material AOChalky
-mol addrep $i
-mol selection element Ga As C
-mol representation DynamicBonds 2.1 0.075 30
-mol color ColorID 2
-mol material AOChalky
-mol addrep $i
-mol selection element Ga As 
-mol representation Dynamicbonds 2.6 0.075 30
-mol color ColorID 2
-mol material AOChalky
-mol addrep $i
-set pbcbonds [exec python3 unitcell_offsets.py [molinfo $i get filename] -i $i -r 0.08 -R 30 -m AOChalky -c colorID -I 2]
-eval $pbcbonds
-}
+#This file contains viewpoints for the VMD viewchangerender plugin.
+#Type 'source /home/hweiske/vmd_loadfiles/new_vcr.vmd' from the VMD command window to load these viewpoints.
+
 proc viewchangerender_restore_my_state {} {
   variable ::VCR::viewpoints
 
@@ -81,14 +43,14 @@ proc viewchangerender_restore_my_state {} {
   set ::VCR::movieList ""
   set ::VCR::movieTimeList ""
   set ::VCR::movieTime 0.0
-  set ::VCR::movieDuration 0.00
+  set ::VCR::movieDuration 0.00  
   ::VCR::calctimescale 0
   global PrevScreenSize
   set PrevScreenSize [display get size]
   proc RestoreScreenSize {} { global PrevScreenSize; display resize [lindex $PrevScreenSize 0] [lindex $PrevScreenSize 1] }
   display resize 2560 1376
   if { [parallel noderank] == 0 } {
-    puts "Loaded viewchangerender viewpoints file new_vcr.vmd "
+    puts "Loaded viewchangerender viewpoints file /home/hweiske/vmd_loadfiles/new_vcr.vmd "
     puts "Note: The screen size has been changed to that stored in the viewpoints file."
     puts "To restore it to its previous size type this into the Tcl console:\n  RestoreScreenSize"
   }
@@ -97,4 +59,5 @@ proc viewchangerender_restore_my_state {} {
 
 
 viewchangerender_restore_my_state
+
 

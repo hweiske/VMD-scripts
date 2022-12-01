@@ -6,7 +6,7 @@ import numpy as np
 from argparse import ArgumentParser
 
 parser = ArgumentParser(description='''plot bonds which occur due to PBCs. include in vmdloadscripts via 
-set pbcbonds [exec python3 /home/hweiske/vmdstyle/unitcell_offsets.py [molinfo top get filename] -i top]
+set pbcbonds [exec python3 unitcell_offsets.py [molinfo top get filename] -i top]
 eval $pbcbonds''',add_help=True)
 parser.add_argument("yourstructure",
                     help="Structure to be plotted")

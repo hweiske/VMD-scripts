@@ -1,3 +1,4 @@
+set VMD_PICTURES "./"
 proc take_picture {args} {
   global take_picture
 
@@ -20,10 +21,11 @@ proc take_picture {args} {
   lassign $args arg1 arg2
   # reset the options to their initial stat
   # (remember to delete the files yourself
+  # VMD_PICTURES is an environment variable
   if {$arg1 == "reset"} {
     set take_picture(frame)  0
     set take_picture(vpts) 0
-    set take_picture(format) "/home/hweiske/vmd_pictures/img_vpts.%01d.%04d.tga"
+    set take_picture(format) "${VMD_PICTURES}/img_vpts.%01d.%04d.tga" 
     set take_picture(method) Tachyon
     set take_picture(modulo) 1
     set take_picture(exec)    {"/usr/local/lib/vmd/tachyon_LINUXAMD64" -aasamples 12 %s -format TARGA -o %s.tga}
@@ -46,7 +48,7 @@ proc take_picture {args} {
 take_picture reset
 proc make_trajectory_movie_files {name} {
 	set num [molinfo top get numframes]
-	take_picture format "/home/hweiske/vmd_pictures/${name}.orient_%02d.frame_%02d.tga"
+	take_picture format "${VMD_PICTURES}/${name}.orient_%02d.frame_%02d.tga"
 	# loop through the frames
 	for {set i 0} {$i < $num} {incr i} {
 		take_picture frame $i
